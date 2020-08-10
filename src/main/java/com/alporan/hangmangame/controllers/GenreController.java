@@ -18,42 +18,23 @@ public class GenreController {
 	
 	private GenreService genreService;
 	
-	public GenreController(GenreService genreService){
+	public GenreController(GenreService genreService) {
 		this.genreService = genreService;
 	}
 	
-	@GetMapping("/genres")
+	@GetMapping("/genre")
 	public List< Genre > findAll(){
 		return genreService.getGenres();
 	}
 	
-	@GetMapping("/genre")
-	public Genre findGenre(@RequestParam(value = "id", required = false) Integer id,
-						  @RequestParam(value = "name", required = false) String name) {
+	@GetMapping("/genre/{id}")
+	public Genre findGenre(@PathVariable(value = "id") int id) {
 		
 		List<Genre> genres = genreService.getGenres();
 		
-		if (id == null && name == null) {
-			return null;
-		} else if (id == null) {
-			for (Genre genre : genres) {
-				if (name.equals(genre.getName())) {
-					return genre;
-				}
-			}
-			return null;
-		} else if (name == null) {
-			for (Genre genre : genres) {
-				if (id.equals(genre.getId())) {
-					return genre;
-				}
-			}
-			return null;
-		} else{
-			for (Genre genre : genres) {
-				if (id.equals(genre.getId()) && name.equals(genre.getName())) {
-					return genre;
-				}
+		for (Genre genre : genres) {
+			if (id == genre.getId()) {
+				return genre;
 			}
 		}
 		return null;

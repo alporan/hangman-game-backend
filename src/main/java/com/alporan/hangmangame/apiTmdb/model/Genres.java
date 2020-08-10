@@ -15,9 +15,6 @@ public class Genres implements Serializable {
 		return genres;
 	}
 	
-	public void setGenres(List<Genre> genres) {
-		this.genres = genres;
-	}
 	
 	@Override
 	public String toString() {
