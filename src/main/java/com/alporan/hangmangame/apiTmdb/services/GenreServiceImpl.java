@@ -1,6 +1,5 @@
 package com.alporan.hangmangame.apiTmdb.services;
 
-import com.alporan.hangmangame.apiTmdb.services.GenreService;
 import com.alporan.hangmangame.apiTmdb.model.Genres;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,10 @@ public class GenreServiceImpl implements GenreService {
 	private final String api_key;
 	private final String api_language;
 	
-	public GenreServiceImpl(RestTemplate restTemplate, @Value("${tmdb_genre_url}") String api_url,
-							@Value("${tmdb_api_key}") String api_key, @Value("${tmdb_language}") String api_language) {
+	public GenreServiceImpl(RestTemplate restTemplate,
+							@Value("${tmdb_genre_url}") String api_url,
+							@Value("${tmdb_api_key}") String api_key,
+							@Value("${tmdb_language}") String api_language) {
 		this.restTemplate = restTemplate;
 		this.api_url = api_url;
 		this.api_key = api_key;

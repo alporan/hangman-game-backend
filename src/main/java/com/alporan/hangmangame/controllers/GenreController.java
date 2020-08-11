@@ -2,16 +2,10 @@ package com.alporan.hangmangame.controllers;
 
 import com.alporan.hangmangame.apiTmdb.model.Genre;
 import com.alporan.hangmangame.apiTmdb.services.GenreService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class GenreController {
@@ -28,7 +22,7 @@ public class GenreController {
 	}
 	
 	@GetMapping("/genre/{id}")
-	public Genre findGenre(@PathVariable(value = "id") int id) {
+	public Genre findGenreById(@PathVariable(value = "id") int id) {
 		
 		List<Genre> genres = genreService.getGenres();
 		
