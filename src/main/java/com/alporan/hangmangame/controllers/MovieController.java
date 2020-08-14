@@ -20,16 +20,16 @@ public class MovieController {
 	
 	@GetMapping("/movie")
 	public Movie findRandomMovie(@RequestParam(value="genre") Optional<Integer> genre,
-									   @RequestParam(value="year") Optional<String> year) {
+									   @RequestParam(value="year") Optional<Integer> year) {
 		
 		Date today = new Date();
 		Calendar calender = Calendar.getInstance();
 		calender.setTime(today);
-		int maxYear = calender.get(Calendar.YEAR);
+		int currentYear = calender.get(Calendar.YEAR);
 		
 		Random random = new Random();
 		int randomMovieIndex = random.nextInt(9);
-		int randomYear = random.nextInt(maxYear - 1959) + 1960;
+		int randomYear = random.nextInt(currentYear - 1959) + 1960;
 		int randomMonth = random.nextInt(8) + 1;
 		int randomDay = random.nextInt(28) + 1;
 		
@@ -37,8 +37,15 @@ public class MovieController {
 		String endDate;
 		
 		if (year.isPresent()) {
-			startDate = year.get() + "-" + String.format("%02d", randomMonth) + "-" + String.format("%02d", randomDay);
-			endDate = year.get() + "-" + String.format("%02d", randomMonth + 4) + "-" + String.format("%02d", randomDay);
+			int tempYear;
+			if ( year.get() + 9  < currentYear) {
+				tempYear = random.nextInt(10) + year.get();
+			} else{
+				int yearDifference = currentYear - year.get();
+				tempYear = random.nextInt(yearDifference + 1) + year.get();
+			}
+			startDate = tempYear + "-" + String.format("%02d", randomMonth) + "-" + String.format("%02d", randomDay);
+			endDate = tempYear + "-" + String.format("%02d", randomMonth + 4) + "-" + String.format("%02d", randomDay);
 		} else {
 			startDate = randomYear + "-" + String.format("%02d", randomMonth) + "-" + String.format("%02d", randomDay);
 			endDate = randomYear + "-" + String.format("%02d", randomMonth + 4) + "-" + String.format("%02d", randomDay);
