@@ -11,7 +11,7 @@ public class Movie implements Serializable {
 	private Integer id;
 	
 	@JsonProperty("imdb_id")
-	private String ibdmId;
+	private String imdbId;
 	
 	@JsonProperty("spoken_languages")
 	private List<Language> spokenLanguages;
